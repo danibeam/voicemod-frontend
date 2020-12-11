@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +9,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import reducer from './store/reducer';
 
-const store = createStore(reducer);
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
 
 ReactDOM.render(
   <Provider store={store}>
