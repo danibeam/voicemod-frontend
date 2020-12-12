@@ -2,8 +2,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
 
 export const Dashboard = (props) => {
   const { voices } = props;
