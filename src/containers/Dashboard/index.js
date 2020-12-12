@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import './style.scss';
 
 export const Dashboard = (props) => {
   const { voices } = props;
@@ -12,11 +13,14 @@ export const Dashboard = (props) => {
       <Header text="Hola" />
       <div className="dashboard">
         <h1>Hey, Dashboard!</h1>
-        <ul>
+        <div className="voices-wrapper">
           {voices.map((voice) => (
-            <li>{voice.name}</li>
+            <div className="voice">
+              <img alt={voice.icon} src={`/assets/${voice.icon}`} />
+              <span>{voice.name}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       <Footer />
     </>
