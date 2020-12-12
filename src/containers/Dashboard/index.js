@@ -1,9 +1,29 @@
-import React, { useState } from 'react';
+/* eslint-disable react/require-default-props */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Dashboard = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [greeting, setGreeting] = useState('Hello, world!');
-  return <h1>{greeting}</h1>;
+export const Dashboard = (props) => {
+  const { voices } = props;
+  return (
+    <div className="dashboard">
+      <h1>Hey, Dashboard!</h1>
+      <ul>
+        {voices.map((voice) => (
+          <li>{voice.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default Dashboard;
+Dashboard.propTypes = {
+  voices: PropTypes.arrayOf(PropTypes.object),
+};
+
+const mapStateToProps = (state) => ({
+  voices: state.voices,
+});
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
