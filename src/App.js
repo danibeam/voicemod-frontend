@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
-import Dashboard from './containers/Dashboard';
+import VoicesDashboard from './containers/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      <VoicesDashboard />
     </div>
   );
 }

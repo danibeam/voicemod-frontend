@@ -2,18 +2,24 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 export const Dashboard = (props) => {
   const { voices } = props;
   return (
-    <div className="dashboard">
-      <h1>Hey, Dashboard!</h1>
-      <ul>
-        {voices.map((voice) => (
-          <li>{voice.name}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Header text="Hola" />
+      <div className="dashboard">
+        <h1>Hey, Dashboard!</h1>
+        <ul>
+          {voices.map((voice) => (
+            <li>{voice.name}</li>
+          ))}
+        </ul>
+      </div>
+      <Footer />
+    </>
   );
 };
 
