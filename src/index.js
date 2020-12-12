@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
+import 'normalize.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import reducer from './store/reducer';
