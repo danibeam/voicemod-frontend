@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Search from '../Search';
 import Filter from '../Filter';
-import Sort from '../Sort';
+import Search from '../Search';
 import Shuffle from '../Shuffle';
+import Sort from '../Sort';
+import './style.scss';
 
-function Header(props) {
-  const { text } = props;
+function Header() {
   return (
     <div className="Header">
-      {text}
       <Search />
       <Filter />
       <Sort />
@@ -17,9 +15,5 @@ function Header(props) {
     </div>
   );
 }
-
-Header.propTypes = {
-  text: PropTypes.string.isRequired,
-};
 
 export default Header;

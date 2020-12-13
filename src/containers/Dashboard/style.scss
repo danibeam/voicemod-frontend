@@ -9,11 +9,12 @@
       margin: 1em;
       position: relative;
       & > img {
+        background-color: #dbdbdb;
         //   Border radius
         border-radius: 200px 200px 200px 200px;
         -moz-border-radius: 200px 200px 200px 200px;
         -webkit-border-radius: 200px 200px 200px 200px;
-        border: 1px solid #8a8a8a;
+        border: 1px solid #696969;
 
         // Inset shadow
         -webkit-box-shadow: inset 0px 0px 20px 0px rgba(173, 173, 173, 1);

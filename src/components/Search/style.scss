@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+input[type='search'] {
+  width: 100%;
+  max-width: 250px;
+  min-width: 150px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px 10px 35px;
+  background: black url('/assets/search.svg') no-repeat left;
+  color: var(--color-text);
+
+  &:focus {
+    outline: none;
+  }
+}
