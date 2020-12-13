@@ -4,4 +4,9 @@
   width: 90%;
   margin: auto;
   padding: 2em 0;
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+  }
 }

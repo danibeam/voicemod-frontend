@@ -9,9 +9,11 @@ function Header() {
   return (
     <div className="Header">
       <Search />
-      <Filter />
-      <Sort />
-      <Shuffle />
+      <div className="Header-actions">
+        <Filter />
+        <Sort />
+        <Shuffle />
+      </div>
     </div>
   );
 }
