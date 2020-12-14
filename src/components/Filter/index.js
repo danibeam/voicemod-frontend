@@ -1,13 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import Tags from 'services/tags';
+import { connect } from 'react-redux';
 import './style.scss';
 
-function Filter() {
+function Filter(props) {
+  const { tags } = props;
   return (
     <div className="container">
       <img alt="Filter" src="assets/filter.svg" />
       <select className="dropdown">
-        {Tags.map((tag) => (
+        {tags.map((tag) => (
           <option className="dropdown-option">{tag}</option>
         ))}
       </select>
@@ -15,4 +17,14 @@ function Filter() {
   );
 }
 
-export default Filter;
+Filter.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  tags: state.tags,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

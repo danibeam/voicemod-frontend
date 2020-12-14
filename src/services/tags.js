@@ -1,11 +1,4 @@
-const Tags = [
-  'Devices',
-  'misc',
-  'character',
-  'sing',
-  'human',
-  'environment',
-  'robotic',
-];
-
-export default Tags;
+export default function getTagsFromVoices(voices) {
+  const tags = voices.flatMap((voice) => voice.tags);
+  return [...new Set(tags)];
+}
