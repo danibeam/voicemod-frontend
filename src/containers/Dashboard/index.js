@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import Header from 'components/Header';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -27,6 +26,10 @@ export const Dashboard = (props) => {
 
 Dashboard.propTypes = {
   voices: PropTypes.arrayOf(PropTypes.object),
+};
+
+Dashboard.defaultProps = {
+  voices: [],
 };
 
 const mapStateToProps = (state) => ({

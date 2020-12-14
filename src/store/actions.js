@@ -1,10 +1,22 @@
-/* eslint-disable import/prefer-default-export */
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
+import * as actionTypes from './actionTypes';
 
-export const increment = (payload) => {
+export const sort = (payload) => {
   return {
-    type: INCREMENT,
+    type: actionTypes.SORT,
+    payload,
+  };
+};
+
+export const filter = (payload) => {
+  return {
+    type: actionTypes.FILTER,
+    payload,
+  };
+};
+
+export const search = (payload) => {
+  return {
+    type: actionTypes.SEARCH,
     payload,
   };
 };
