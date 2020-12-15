@@ -19,7 +19,12 @@ export function getFilteredVoices(voices, filter, order) {
   );
 }
 
+export function getFoundVoices(voices, search) {
+  return voices.filter((voice) => voice.name.toLowerCase().includes(search));
+}
+
 export default {
   getOrderedVoices,
   getFilteredVoices,
+  getFoundVoices,
 };

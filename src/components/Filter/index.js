@@ -5,8 +5,7 @@ import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
 
 function Filter(props) {
-  const { tags } = props;
-  const { filter } = props;
+  const { tags, filter } = props;
 
   const onSelectFilter = (event) => {
     props.onFilterTriggered(event.target.value);
