@@ -6,10 +6,8 @@ import './style.scss';
 
 function Search(props) {
   const { search } = props;
-  const onType = (event) => {
-    if (event.target.value) {
-      props.onTriggerSearch(event.target.value.toLowerCase());
-    }
+  const onTypeValue = (event) => {
+    props.onTriggerSearch(event.target.value.toLowerCase());
   };
   return (
     <div>
@@ -19,7 +17,8 @@ function Search(props) {
         className="search"
         placeholder="Search"
         value={search}
-        onChange={onType}
+        onChange={onTypeValue}
+        onReset={onTypeValue}
       />
     </div>
   );

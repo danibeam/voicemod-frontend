@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import './style.scss';
 
 export const Dashboard = (props) => {
-  const { voices } = props;
+  const { filteredVoices } = props;
   return (
     <>
       <Header text="Hola" />
       <div className="dashboard">
         <h1>Hey, Dashboard!</h1>
         <div className="voices-wrapper">
-          {voices.map((voice) => (
+          {filteredVoices.map((voice) => (
             <div className="voice">
               <img alt={voice.icon} src={`/assets/${voice.icon}`} />
               <span>{voice.name}</span>
@@ -25,15 +25,15 @@ export const Dashboard = (props) => {
 };
 
 Dashboard.propTypes = {
-  voices: PropTypes.arrayOf(PropTypes.object),
+  filteredVoices: PropTypes.arrayOf(PropTypes.object),
 };
 
 Dashboard.defaultProps = {
-  voices: [],
+  filteredVoices: [],
 };
 
 const mapStateToProps = (state) => ({
-  voices: state.voices,
+  filteredVoices: state.filteredVoices,
 });
 const mapDispatchToProps = {};
 

@@ -9,8 +9,10 @@ import * as actionTypes from '../actions/actionTypes';
 import settingsReducer from './settings-reducer';
 
 const initialState = {
-  voices: getOrderedVoices(voicesRaw, 'ASC'),
+  // voices: getOrderedVoices(voicesRaw, 'ASC'),
+  voices: voicesRaw,
   tags: getTagsFromVoices(voicesRaw),
+  filteredVoices: getOrderedVoices(voicesRaw, 'ASC'),
   settings: {
     sort: 'ASC',
     filter: 'All',
@@ -23,11 +25,11 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FILTER:
       return {
         ...state,
-        voices:
+        filteredVoices:
           action.payload === 'All'
-            ? getOrderedVoices(initialState.voices, state.settings.sort)
+            ? getOrderedVoices([...state.voices], state.settings.sort)
             : getFilteredVoices(
-                initialState.voices,
+                [...state.voices],
                 action.payload,
                 state.settings.sort
               ),
@@ -36,13 +38,13 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SORT:
       return {
         ...state,
-        voices: getOrderedVoices([...state.voices], action.payload),
+        filteredVoices: getOrderedVoices([...state.voices], action.payload),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SEARCH:
       return {
         ...state,
-        voices: getFoundVoices(initialState.voices, action.payload),
+        filteredVoices: getFoundVoices([...state.voices], action.payload),
         settings: settingsReducer(state.settings, action),
       };
     default:
