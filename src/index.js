@@ -8,7 +8,7 @@ import App from './App';
 import 'normalize.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import reducer from './store/reducer';
+import reducer from './store/reducers/reducer';
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(

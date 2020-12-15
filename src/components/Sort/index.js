@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
-import * as actionTypes from 'store/actionTypes';
 
 function Sort(props) {
   const { sort } = props;
@@ -31,12 +31,11 @@ function Sort(props) {
 
 Sort.propTypes = {
   sort: PropTypes.string,
-  onSortTriggered: PropTypes.func,
+  onSortTriggered: PropTypes.func.isRequired,
 };
 
 Sort.defaultProps = {
   sort: 'ASC',
-  onSortTriggered: null,
 };
 
 const mapStateToProps = (state) => ({

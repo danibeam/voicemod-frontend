@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-export default function getOrderedVoices(voices, order) {
+export function getOrderedVoices(voices, order) {
   let orderedVoices;
   if (order === 'ASC') {
     orderedVoices = voices.sort((a, b) =>
@@ -12,3 +12,12 @@ export default function getOrderedVoices(voices, order) {
   }
   return orderedVoices;
 }
+
+export function getFilteredVoices(voices, filter) {
+  return voices.filter((voice) => voice.tags.includes(filter.toLowerCase()));
+}
+
+export default {
+  getOrderedVoices,
+  getFilteredVoices,
+};

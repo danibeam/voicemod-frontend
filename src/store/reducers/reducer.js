@@ -1,5 +1,5 @@
 import getTagsFromVoices from 'services/tags';
-import getOrderedVoices from 'services/voice-utils';
+import { getOrderedVoices, getFilteredVoices } from 'services/voice-utils';
 import voicesRaw from 'voices.json';
 import * as actionTypes from '../actions/actionTypes';
 import settingsReducer from './settings-reducer';
@@ -19,6 +19,13 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FILTER:
       return {
         ...state,
+        voices:
+          action.payload === 'All'
+            ? getOrderedVoices(initialState.voices, state.settings.sort)
+            : getFilteredVoices(
+                getOrderedVoices(initialState.voices, state.settings.sort),
+                action.payload
+              ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SORT:
