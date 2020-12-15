@@ -23,8 +23,9 @@ const reducer = (state = initialState, action) => {
           action.payload === 'All'
             ? getOrderedVoices(initialState.voices, state.settings.sort)
             : getFilteredVoices(
-                getOrderedVoices(initialState.voices, state.settings.sort),
-                action.payload
+                initialState.voices,
+                action.payload,
+                state.settings.sort
               ),
         settings: settingsReducer(state.settings, action),
       };

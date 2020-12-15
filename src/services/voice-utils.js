@@ -13,8 +13,10 @@ export function getOrderedVoices(voices, order) {
   return orderedVoices;
 }
 
-export function getFilteredVoices(voices, filter) {
-  return voices.filter((voice) => voice.tags.includes(filter.toLowerCase()));
+export function getFilteredVoices(voices, filter, order) {
+  return getOrderedVoices(voices, order).filter((voice) =>
+    voice.tags.includes(filter.toLowerCase())
+  );
 }
 
 export default {
