@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.container {
+  display: flex;
+}
+.dropdown {
+  width: 200px;
+  border-radius: 5px;
+  padding: 5px;
+  background: black;
+  cursor: pointer;
+  color: var(--color-text);
+
+  &-option {
+    display: block;
+    padding: 10px 0 5px;
+  }
+}
