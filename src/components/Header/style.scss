@@ -4,9 +4,16 @@
   width: 90%;
   margin: auto;
   padding: 2em 0;
+  flex-wrap: wrap;
 
   &-actions {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    & > div {
+      @media only screen and (min-width: 1024px) {
+        margin: 0 1em;
+      }
+    }
   }
 }
