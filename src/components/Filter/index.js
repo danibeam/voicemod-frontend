@@ -21,7 +21,7 @@ function Filter(props) {
         placeholder="Filter voices by category"
       >
         {tags.map((tag) => (
-          <option value={tag} className="dropdown-option">
+          <option key={tag} value={tag} className="dropdown-option">
             {tag}
           </option>
         ))}

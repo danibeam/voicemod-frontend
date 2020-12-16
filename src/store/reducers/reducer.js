@@ -9,10 +9,10 @@ import * as actionTypes from '../actions/actionTypes';
 import settingsReducer from './settings-reducer';
 
 const initialState = {
-  // voices: getOrderedVoices(voicesRaw, 'ASC'),
   voices: voicesRaw,
   tags: getTagsFromVoices(voicesRaw),
   filteredVoices: getOrderedVoices(voicesRaw, 'ASC'),
+  selected: null,
   settings: {
     sort: 'ASC',
     filter: 'All',
@@ -46,6 +46,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredVoices: getFoundVoices([...state.voices], action.payload),
         settings: settingsReducer(state.settings, action),
+      };
+    case actionTypes.SELECT:
+      return {
+        ...state,
+        selected: action.payload,
       };
     default:
       return state;

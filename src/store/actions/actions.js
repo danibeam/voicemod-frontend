@@ -20,3 +20,10 @@ export const search = (payload) => {
     payload,
   };
 };
+
+export const select = (payload) => {
+  return {
+    type: actionTypes.SELECT,
+    payload,
+  };
+};
