@@ -23,8 +23,13 @@ export function getFoundVoices(voices, search) {
   return voices.filter((voice) => voice.name.toLowerCase().includes(search));
 }
 
+export function getRandomVoice(voices) {
+  return voices[Math.floor(Math.random() * voices.length)];
+}
+
 export default {
   getOrderedVoices,
   getFilteredVoices,
   getFoundVoices,
+  getRandomVoice,
 };

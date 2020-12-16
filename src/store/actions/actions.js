@@ -21,6 +21,12 @@ export const search = (payload) => {
   };
 };
 
+export const shuffle = () => {
+  return {
+    type: actionTypes.SHUFFLE,
+  };
+};
+
 export const select = (payload) => {
   return {
     type: actionTypes.SELECT,

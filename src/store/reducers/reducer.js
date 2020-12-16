@@ -3,6 +3,7 @@ import {
   getFilteredVoices,
   getFoundVoices,
   getOrderedVoices,
+  getRandomVoice,
 } from 'services/voice-utils';
 import voicesRaw from 'voices.json';
 import * as actionTypes from '../actions/actionTypes';
@@ -46,6 +47,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredVoices: getFoundVoices([...state.voices], action.payload),
         settings: settingsReducer(state.settings, action),
+      };
+    case actionTypes.SHUFFLE:
+      return {
+        ...state,
+        selected: getRandomVoice([...state.filteredVoices]),
       };
     case actionTypes.SELECT:
       return {
