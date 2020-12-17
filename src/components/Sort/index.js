@@ -19,10 +19,10 @@ function Sort(props) {
         value={sort}
       >
         <option value="ASC" className="dropdown-option">
-          Order by name ASC
+          ASC
         </option>
         <option value="DESC" className="dropdown-option">
-          Order by name DESC
+          DESC
         </option>
       </select>
     </div>

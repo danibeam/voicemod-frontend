@@ -4,6 +4,7 @@ const initialState = {
   sort: 'ASC',
   filter: 'All',
   search: null,
+  isShuffled: false,
 };
 
 const settingsReducer = (state = initialState, action) => {
@@ -22,6 +23,16 @@ const settingsReducer = (state = initialState, action) => {
       return {
         ...state,
         search: action.payload,
+      };
+    case actionTypes.SHUFFLE:
+      return {
+        ...state,
+        isShuffled: true,
+      };
+    case actionTypes.SELECT:
+      return {
+        ...state,
+        isShuffled: false,
       };
     default:
       return state;

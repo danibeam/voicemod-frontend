@@ -1,11 +1,10 @@
+import voicesRaw from 'data/voices.json';
 import getTagsFromVoices from 'services/tags';
 import {
-  getFilteredVoices,
-  getFoundVoices,
   getOrderedVoices,
   getRandomVoice,
+  getVoices,
 } from 'services/voice-utils';
-import voicesRaw from 'voices.json';
 import * as actionTypes from '../actions/actionTypes';
 import settingsReducer from './settings-reducer';
 
@@ -18,6 +17,7 @@ const initialState = {
     sort: 'ASC',
     filter: 'All',
     search: null,
+    isShuffled: null,
   },
 };
 
@@ -27,36 +27,48 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredVoices:
-          action.payload === 'All'
-            ? getOrderedVoices([...state.voices], state.settings.sort)
-            : getFilteredVoices(
-                [...state.voices],
-                action.payload,
-                state.settings.sort
-              ),
+          // action.payload === 'All'
+          //   ? getOrderedVoices([...state.voices], state.settings.sort)
+          //   :
+          getVoices(
+            [...state.voices],
+            action.payload,
+            state.settings.search,
+            state.settings.sort
+          ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SORT:
       return {
         ...state,
-        filteredVoices: getOrderedVoices([...state.voices], action.payload),
+        filteredVoices: getOrderedVoices(
+          [...state.filteredVoices],
+          action.payload
+        ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SEARCH:
       return {
         ...state,
-        filteredVoices: getFoundVoices([...state.voices], action.payload),
+        filteredVoices: getVoices(
+          [...state.voices],
+          state.settings.filter,
+          action.payload,
+          state.settings.sort
+        ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SHUFFLE:
       return {
         ...state,
         selected: getRandomVoice([...state.filteredVoices]),
+        settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SELECT:
       return {
         ...state,
         selected: action.payload,
+        settings: settingsReducer(state.settings, action),
       };
     default:
       return state;

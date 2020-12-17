@@ -13,23 +13,27 @@ export function getOrderedVoices(voices, order) {
   return orderedVoices;
 }
 
-export function getFilteredVoices(voices, filter, order) {
-  return getOrderedVoices(voices, order).filter((voice) =>
-    voice.tags.includes(filter.toLowerCase())
-  );
-}
-
-export function getFoundVoices(voices, search) {
-  return voices.filter((voice) => voice.name.toLowerCase().includes(search));
-}
-
 export function getRandomVoice(voices) {
   return voices[Math.floor(Math.random() * voices.length)];
 }
 
+export function getVoices(voices, filter, search, order) {
+  return filter === 'All'
+    ? getOrderedVoices(
+        voices.filter((voice) => voice.name.toLowerCase().includes(search)),
+        order
+      )
+    : getOrderedVoices(
+        voices.filter(
+          (voice) =>
+            voice.name.toLowerCase().includes(search) &&
+            voice.tags.includes(filter.toLowerCase())
+        )
+      );
+}
+
 export default {
   getOrderedVoices,
-  getFilteredVoices,
-  getFoundVoices,
   getRandomVoice,
+  getVoices,
 };

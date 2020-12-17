@@ -1,19 +1,45 @@
 .Header {
   display: flex;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: center;
   margin: auto;
   padding: 2em 0;
   flex-wrap: wrap;
 
   &-actions {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-auto-flow: column;
     flex-wrap: wrap;
     & > div {
-      @media only screen and (min-width: 1024px) {
+      display: inline-flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media only screen and (min-width: 1066px) {
+  .Header {
+    justify-content: space-between;
+    &-actions {
+      display: flex;
+      flex-wrap: unset;
+      justify-content: space-between;
+      & > div {
         margin: 0 1em;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 652px) {
+  .Header div {
+    margin: 0.5em 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .Header {
+    &-actions {
+      grid-auto-flow: unset;
     }
   }
 }
