@@ -11,12 +11,13 @@ import settingsReducer from './settings-reducer';
 const initialState = {
   voices: voicesRaw,
   tags: getTagsFromVoices(voicesRaw),
-  filteredVoices: getOrderedVoices(voicesRaw, 'ASC'),
+  // filteredVoices: getOrderedVoices(voicesRaw, 'ASC'),
+  filteredVoices: getVoices(voicesRaw, 'All', '', 'ASC'),
   selected: null,
   settings: {
     sort: 'ASC',
     filter: 'All',
-    search: null,
+    search: '',
     isShuffled: null,
   },
 };
@@ -26,16 +27,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FILTER:
       return {
         ...state,
-        filteredVoices:
-          // action.payload === 'All'
-          //   ? getOrderedVoices([...state.voices], state.settings.sort)
-          //   :
-          getVoices(
-            [...state.voices],
-            action.payload,
-            state.settings.search,
-            state.settings.sort
-          ),
+        filteredVoices: getVoices(
+          [...state.voices],
+          action.payload,
+          state.settings.search,
+          state.settings.sort
+        ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SORT:

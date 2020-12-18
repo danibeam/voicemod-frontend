@@ -25,12 +25,8 @@ function Search(props) {
 }
 
 Search.propTypes = {
-  search: PropTypes.string,
+  search: PropTypes.string.isRequired,
   onTriggerSearch: PropTypes.func.isRequired,
-};
-
-Search.defaultProps = {
-  search: null,
 };
 
 const mapStateToProps = (state) => ({

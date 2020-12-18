@@ -26,9 +26,10 @@ export function getVoices(voices, filter, search, order) {
     : getOrderedVoices(
         voices.filter(
           (voice) =>
-            voice.name.toLowerCase().includes(search) &&
-            voice.tags.includes(filter.toLowerCase())
-        )
+            voice.tags.includes(filter.toLowerCase()) &&
+            voice.name.toLowerCase().includes(search)
+        ),
+        order
       );
 }
 
