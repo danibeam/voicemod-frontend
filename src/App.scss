@@ -35,28 +35,28 @@
   color: #61dafb;
 }
 
-.dropdown {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: transparent;
-  width: 150px;
-  border-radius: 5px;
-  padding: 5px;
-  background: black url('/assets/select-arrow.svg') no-repeat 90%;
-  cursor: pointer;
-  color: var(--color-text);
-  border: none;
-  margin: 0 0 0 0.5em;
+// .dropdown {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   background: transparent;
+//   width: 150px;
+//   border-radius: 5px;
+//   padding: 5px;
+//   background: black url('/assets/select-arrow.svg') no-repeat 90%;
+//   cursor: pointer;
+//   color: var(--color-text);
+//   border: none;
+//   margin: 0 0 0 0.5em;
 
-  &:focus {
-    outline: none;
-  }
+//   &:focus {
+//     outline: none;
+//   }
 
-  &-option {
-    display: block;
-    padding: 10px 0 5px;
-  }
-}
+//   &-option {
+//     display: block;
+//     padding: 10px 0 5px;
+//   }
+// }
 
 @keyframes App-logo-spin {
   from {

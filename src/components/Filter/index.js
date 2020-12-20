@@ -1,3 +1,4 @@
+import Dropdown from 'components/Dropdown';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -5,40 +6,32 @@ import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
 
 function Filter(props) {
-  const { tags, filter } = props;
+  const { tags } = props;
 
-  const onSelectFilter = (event) => {
-    props.onFilterTriggered(event.target.value);
+  const tagOptions = tags.map((tag, index) => ({
+    id: index,
+    value: tag,
+  }));
+
+  const onSelectFilter = (option) => {
+    props.onFilterTriggered(option.value);
   };
 
   return (
     <div className="container">
       <img alt="Filter" src="assets/filter.svg" />
-      <select
-        className="dropdown"
-        onChange={onSelectFilter}
-        value={filter}
-        placeholder="Filter voices by category"
-      >
-        {tags.map((tag) => (
-          <option key={tag} value={tag} className="dropdown-option">
-            {tag}
-          </option>
-        ))}
-      </select>
+      <Dropdown options={tagOptions} changeDropdown={onSelectFilter} />
     </div>
   );
 }
 
 Filter.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
-  filter: PropTypes.string,
   onFilterTriggered: PropTypes.func.isRequired,
 };
 
 Filter.defaultProps = {
   tags: [],
-  filter: 'All',
 };
 
 const mapStateToProps = (state) => ({

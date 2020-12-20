@@ -1,3 +1,4 @@
+import Dropdown from 'components/Dropdown';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -5,37 +6,29 @@ import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
 
 function Sort(props) {
-  const { sort } = props;
+  const sortOptions = [
+    {
+      id: 1,
+      value: 'ASC',
+    },
+    {
+      id: 2,
+      value: 'DESC',
+    },
+  ];
   const onSelectSorter = (event) => {
-    props.onSortTriggered(event.target.value);
+    props.onSortTriggered(event.value);
   };
   return (
     <div className="container">
       <img alt="Sort" src="assets/order.svg" />
-      <select
-        onChange={onSelectSorter}
-        className="dropdown"
-        placeholder="Order voices by name"
-        value={sort}
-      >
-        <option value="ASC" className="dropdown-option">
-          ASC
-        </option>
-        <option value="DESC" className="dropdown-option">
-          DESC
-        </option>
-      </select>
+      <Dropdown options={sortOptions} changeDropdown={onSelectSorter} />
     </div>
   );
 }
 
 Sort.propTypes = {
-  sort: PropTypes.string,
   onSortTriggered: PropTypes.func.isRequired,
-};
-
-Sort.defaultProps = {
-  sort: 'ASC',
 };
 
 const mapStateToProps = (state) => ({

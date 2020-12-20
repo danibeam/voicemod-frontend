@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.dd-wrapper {
+  width: 150px;
+  position: relative;
+  display: inline-block;
+  margin: 0 0.5em;
+
+  .dd-header {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px;
+    background-color: var(--color-input-background);
+    cursor: pointer;
+    color: var(--color-text);
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+    &__action {
+      align-self: center;
+      img {
+        transition: transform 0.3s ease-in-out;
+      }
+      &__close {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .dd-list {
+    width: 150px;
+    position: absolute;
+    list-style-type: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+
+    &-item {
+      background-color: var(--color-input-background);
+      border-top: 1px solid var(--color-input-border);
+      cursor: pointer;
+      padding: 0.5em;
+      color: var(--color-text);
+      &:hover {
+        color: var(--color-voice-hover-background);
+      }
+    }
+  }
+}
