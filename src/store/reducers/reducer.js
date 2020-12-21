@@ -10,9 +10,10 @@ import settingsReducer from './settings-reducer';
 
 const initialState = {
   voices: voicesRaw,
-  tags: getTagsFromVoices(voicesRaw),
-  // filteredVoices: getOrderedVoices(voicesRaw, 'ASC'),
   filteredVoices: getVoices(voicesRaw, 'All', '', 'ASC'),
+  tags: getTagsFromVoices(voicesRaw),
+  favs: [],
+  filteredFavs: [],
   selected: null,
   settings: {
     sort: 'ASC',
@@ -33,6 +34,12 @@ const reducer = (state = initialState, action) => {
           state.settings.search,
           state.settings.sort
         ),
+        filteredFavs: getVoices(
+          [...state.favs],
+          action.payload,
+          state.settings.search,
+          state.settings.sort
+        ),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SORT:
@@ -42,6 +49,7 @@ const reducer = (state = initialState, action) => {
           [...state.filteredVoices],
           action.payload
         ),
+        filteredFavs: getOrderedVoices([...state.filteredFavs], action.payload),
         settings: settingsReducer(state.settings, action),
       };
     case actionTypes.SEARCH:
@@ -49,6 +57,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredVoices: getVoices(
           [...state.voices],
+          state.settings.filter,
+          action.payload,
+          state.settings.sort
+        ),
+        filteredFavs: getVoices(
+          [...state.favs],
           state.settings.filter,
           action.payload,
           state.settings.sort
@@ -66,6 +80,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         selected: action.payload,
         settings: settingsReducer(state.settings, action),
+      };
+    case actionTypes.SET_FAV:
+      return {
+        ...state,
+        favs: [...state.favs].concat(action.payload),
+        filteredFavs: [...state.filteredFavs].concat(action.payload),
+      };
+    case actionTypes.SET_UNFAV:
+      return {
+        ...state,
+        favs: [...state.favs].filter((fav) => fav.id !== action.payload.id),
+        filteredFavs: [...state.filteredFavs].filter(
+          (fav) => fav.id !== action.payload.id
+        ),
       };
     default:
       return state;

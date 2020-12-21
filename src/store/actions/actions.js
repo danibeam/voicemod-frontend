@@ -33,3 +33,17 @@ export const select = (payload) => {
     payload,
   };
 };
+
+export const setFav = (payload) => {
+  return {
+    type: actionTypes.SET_FAV,
+    payload,
+  };
+};
+
+export const setUnFav = (payload) => {
+  return {
+    type: actionTypes.SET_UNFAV,
+    payload,
+  };
+};

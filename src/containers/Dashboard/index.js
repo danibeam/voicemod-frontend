@@ -11,9 +11,7 @@ import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
 
 export const Dashboard = (props) => {
-  const { filteredVoices, selected } = props;
-
-  const [favs, setFavs] = useState([]);
+  const { filteredVoices, filteredFavs, selected } = props;
   const [voiceHovered, setVoiceHovered] = useState(null);
 
   const selectedVoice = useSelector((state) => state.selected);
@@ -36,6 +34,14 @@ export const Dashboard = (props) => {
     props.onSelectedVoice(voice);
   };
 
+  const onClickFavVoice = (voice, status) => {
+    if (status) {
+      props.onFavVoice(voice);
+    } else {
+      props.onUnFavVoice(voice);
+    }
+  };
+
   return (
     <div className="container">
       <Header />
@@ -43,7 +49,7 @@ export const Dashboard = (props) => {
         <section>
           <h1 className="section-header">Favourite Voices</h1>
           <div className="voices-wrapper">
-            {favs.map((favourite) => (
+            {filteredFavs.map((favourite) => (
               <div
                 key={favourite.id}
                 id={favourite.id}
@@ -55,9 +61,7 @@ export const Dashboard = (props) => {
                   <FavSvg
                     className="fav-icon"
                     title="Remove from the Favourites >:"
-                    onClick={() =>
-                      setFavs(favs.filter((fav) => fav.id !== favourite.id))
-                    }
+                    onClick={() => onClickFavVoice(favourite, false)}
                   />
                 ) : (
                   ''
@@ -98,22 +102,18 @@ export const Dashboard = (props) => {
                 onMouseLeave={() => setVoiceHovered(null)}
               >
                 {voiceHovered === voice.id ? (
-                  favs.some((fav) => fav.id === voice.id) ? (
+                  filteredFavs.some((fav) => fav.id === voice.id) ? (
                     <FavSvg
                       className="fav-icon"
                       title="Remove from the Favourites >:"
-                      onClick={() =>
-                        setFavs(favs.filter((fav) => fav.id !== voice.id))
-                      }
+                      onClick={() => onClickFavVoice(voice, false)}
                     />
                   ) : (
                     <NonFavSvg
                       className="fav-icon"
                       title="Fav this voice!"
-                      onClick={() =>
-                        favs.some((fav) => fav.id === voice.id)
-                          ? ''
-                          : setFavs([...favs, voice])
+                      onClick={
+                        voice.isFav ? '' : () => onClickFavVoice(voice, true)
                       }
                     />
                   )
@@ -148,17 +148,22 @@ export const Dashboard = (props) => {
 
 Dashboard.propTypes = {
   filteredVoices: PropTypes.arrayOf(PropTypes.object),
+  filteredFavs: PropTypes.arrayOf(PropTypes.object),
   selected: PropTypes.objectOf(PropTypes.object),
   onSelectedVoice: PropTypes.func.isRequired,
+  onFavVoice: PropTypes.func.isRequired,
+  onUnFavVoice: PropTypes.func.isRequired,
 };
 
 Dashboard.defaultProps = {
   filteredVoices: [],
+  filteredFavs: [],
   selected: null,
 };
 
 const mapStateToProps = (state) => ({
   filteredVoices: state.filteredVoices,
+  filteredFavs: state.filteredFavs,
   selected: state.selected,
 });
 
@@ -167,6 +172,16 @@ const mapDispatchToProps = (dispatch) => {
     onSelectedVoice: (payload) =>
       dispatch({
         type: actionTypes.SELECT,
+        payload,
+      }),
+    onFavVoice: (payload) =>
+      dispatch({
+        type: actionTypes.SET_FAV,
+        payload,
+      }),
+    onUnFavVoice: (payload) =>
+      dispatch({
+        type: actionTypes.SET_UNFAV,
         payload,
       }),
   };
