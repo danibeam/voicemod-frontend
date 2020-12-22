@@ -59,7 +59,7 @@ const Dropdown = ({ options, changeDropdown }) => {
 };
 
 Dropdown.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.objectOf),
   changeDropdown: PropTypes.func.isRequired,
 };
 

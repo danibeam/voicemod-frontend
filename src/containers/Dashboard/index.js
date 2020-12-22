@@ -11,7 +11,7 @@ import * as actionTypes from 'store/actions/actionTypes';
 import './style.scss';
 
 export const Dashboard = (props) => {
-  const { filteredVoices, filteredFavs, selected } = props;
+  const { filteredVoices, filteredFavs } = props;
   const [voiceHovered, setVoiceHovered] = useState(null);
 
   const selectedVoice = useSelector((state) => state.selected);
@@ -23,7 +23,7 @@ export const Dashboard = (props) => {
 
   useEffect(() => {
     if (isShuffled) {
-      refs[selected.id].current.scrollIntoView({
+      refs[selectedVoice.id].current.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       });
@@ -70,13 +70,15 @@ export const Dashboard = (props) => {
                   alt={favourite.icon}
                   src={`/assets/${favourite.icon}`}
                   className={
-                    selected && selected.id === favourite.id ? 'selected' : ''
+                    selectedVoice && selectedVoice.id === favourite.id
+                      ? 'selected'
+                      : ''
                   }
                   onClick={() => onClickedVoice(favourite)}
                 />
                 <span
                   className={
-                    selected && selected.id === favourite.id
+                    selectedVoice && selectedVoice.id === favourite.id
                       ? 'voice-name-selected'
                       : 'voice-name'
                   }
@@ -125,12 +127,14 @@ export const Dashboard = (props) => {
                   src={`/assets/${voice.icon}`}
                   onClick={() => onClickedVoice(voice)}
                   className={
-                    selected && selected.id === voice.id ? 'selected' : ''
+                    selectedVoice && selectedVoice.id === voice.id
+                      ? 'selected'
+                      : ''
                   }
                 />
                 <span
                   className={
-                    selected && selected.id === voice.id
+                    selectedVoice && selectedVoice.id === voice.id
                       ? 'voice-name-selected'
                       : 'voice-name'
                   }
@@ -149,7 +153,6 @@ export const Dashboard = (props) => {
 Dashboard.propTypes = {
   filteredVoices: PropTypes.arrayOf(PropTypes.object),
   filteredFavs: PropTypes.arrayOf(PropTypes.object),
-  selected: PropTypes.objectOf(PropTypes.object),
   onSelectedVoice: PropTypes.func.isRequired,
   onFavVoice: PropTypes.func.isRequired,
   onUnFavVoice: PropTypes.func.isRequired,
@@ -158,13 +161,11 @@ Dashboard.propTypes = {
 Dashboard.defaultProps = {
   filteredVoices: [],
   filteredFavs: [],
-  selected: null,
 };
 
 const mapStateToProps = (state) => ({
   filteredVoices: state.filteredVoices,
   filteredFavs: state.filteredFavs,
-  selected: state.selected,
 });
 
 const mapDispatchToProps = (dispatch) => {
